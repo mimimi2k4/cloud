@@ -1,0 +1,10 @@
+Thư mục này chứa ảnh chụp màn hình Wireshark và tcpdump.
+
+Cần chụp:
+- VMware Virtual Network Editor (vmnet2 + vmnet3)
+- ip addr show trên VM1
+- DHCP Discover/Offer/Request/ACK trong Wireshark
+- TCP 3-way handshake trong Wireshark
+- iptables -L output
+- ping 8.8.8.8 từ VM2 thành công
+- fail2ban status

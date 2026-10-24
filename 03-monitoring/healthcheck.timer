@@ -1,0 +1,11 @@
+[Unit]
+Description=Run health check every 5 minutes
+Requires=healthcheck.service
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=5min
+Unit=healthcheck.service
+
+[Install]
+WantedBy=timers.target

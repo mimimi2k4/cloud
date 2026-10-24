@@ -1,0 +1,22 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'vm1-gateway'
+    static_configs:
+      - targets: ['10.10.10.1:9100']   # node_exporter on VM1
+        labels:
+          instance: 'vm1-gateway'
+
+  - job_name: 'vm2-webserver'
+    static_configs:
+      - targets: ['10.10.20.10:9100']  # node_exporter on VM2
+        labels:
+          instance: 'vm2-webserver'
+
+  - job_name: 'vm3-monitoring'
+    static_configs:
+      - targets: ['10.10.10.10:9100']  # node_exporter on VM3 (localhost)
+        labels:
+          instance: 'vm3-monitoring'

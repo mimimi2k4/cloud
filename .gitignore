@@ -1,0 +1,18 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
+*~
+
+# Secrets (KHÔNG commit token Telegram hay password)
+*.env
+.env
+secrets/
+
+# Large files (upload screenshots riêng)
+*.vmdk
+*.ova
+*.iso
