@@ -16,3 +16,7 @@ secrets/
 *.vmdk
 *.ova
 *.iso
+*.vmx
+*.vmem
+vms/
+

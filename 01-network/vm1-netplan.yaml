@@ -5,14 +5,15 @@ network:
       # WAN interface — DHCP from VMware NAT
       dhcp4: true
 
-    ens36:
+    ens34:
       # LAN interface — static IP
       dhcp4: false
       addresses:
         - 10.10.10.1/24
 
-    ens38:
+    ens35:
       # DMZ interface — static IP
       dhcp4: false
       addresses:
         - 10.10.20.1/24
+
