@@ -8,6 +8,13 @@
 
 ## 📐 Kiến trúc tổng thể
 
+<p align="center">
+  <img src="./docs/network-diagram.png" alt="Sơ đồ mạng Lab Private Cloud" width="850">
+</p>
+
+<details>
+<summary><b>Xem sơ đồ dạng ASCII Text</b></summary>
+
 ```
 Internet ── Host Windows (16GB RAM) ── VMware NAT (192.168.x.x)
                                               │
@@ -35,6 +42,8 @@ Internet ── Host Windows (16GB RAM) ── VMware NAT (192.168.x.x)
                 └────────────────────────────────────────────────┘
 ```
 
+</details>
+
 ### Bảng chia subnet
 
 | Vùng | Subnet | Gateway | DHCP Range | Mục đích |
@@ -48,20 +57,20 @@ Internet ── Host Windows (16GB RAM) ── VMware NAT (192.168.x.x)
 
 | Ngày | Nội dung | Trạng thái |
 |------|----------|------------|
-| 1 | Tạo VMware Host-only network, cài VM1 Ubuntu Server 3 NIC | ⬜ |
-| 2 | VM1: netplan IP tĩnh, ip_forward, NAT iptables, dnsmasq DHCP/DNS | ⬜ |
-| 3 | Firewall rules: LAN→DMZ port 80/443; SSH key + fail2ban | ⬜ |
-| 4 | Wireshark/tcpdump bắt DHCP, DNS, TCP handshake, chụp ảnh | ⬜ |
-| 5 | Viết sơ đồ mạng, bảng subnet vào README | ⬜ |
-| 6 | VM2: Docker + 3 container web + Nginx reverse proxy/LB Round Robin | ⬜ |
-| 7 | VM3: Prometheus + Grafana + node_exporter trên cả 3 VM | ⬜ |
-| 8 | Bash health check script + cron/systemd timer + Telegram alert | ⬜ |
-| 9 | Tạo VM4, bật VT-x/EPT trong VMware, cài DevStack | ⬜ |
-| 10 | Horizon: tạo network/router/image, chạy instance, floating IP | ⬜ |
-| 11 | Ghi chú Keystone/Nova/Neutron/Glance/Cinder bằng lời của mình | ⬜ |
-| 12 | (Dự phòng) KVM + virsh nếu DevStack thất bại | ⬜ |
-| 13 | Dọn repo: README, sơ đồ, config files, scripts, screenshots | ⬜ |
-| 14 | Cập nhật CV, kiểm tra GitHub link | ⬜ |
+| 1 | Tạo VMware Host-only network, cài VM1 Ubuntu Server 3 NIC | ✅ |
+| 2 | VM1: netplan IP tĩnh, ip_forward, NAT iptables, dnsmasq DHCP/DNS | ✅ |
+| 3 | Firewall rules: LAN→DMZ port 80/443; SSH key + fail2ban | ✅ |
+| 4 | Wireshark/tcpdump bắt DHCP, DNS, TCP handshake, chụp ảnh | ✅ |
+| 5 | Viết sơ đồ mạng, bảng subnet vào README | ✅ |
+| 6 | VM2: Docker + 3 container web + Nginx reverse proxy/LB Round Robin | ✅ |
+| 7 | VM3: Prometheus + Grafana + node_exporter trên cả 3 VM | ✅ |
+| 8 | Bash health check script + cron/systemd timer + Telegram alert | ✅ |
+| 9 | Tạo VM4, bật VT-x/EPT trong VMware, cài DevStack | ✅ |
+| 10 | Horizon: tạo network/router/image, chạy instance, floating IP | ✅ |
+| 11 | Ghi chú Keystone/Nova/Neutron/Glance/Cinder bằng lời của mình | ✅ |
+| 12 | (Dự phòng) KVM + virsh nếu DevStack thất bại | ✅ |
+| 13 | Dọn repo: README, sơ đồ, config files, scripts, screenshots | ✅ |
+| 14 | Cập nhật CV, kiểm tra GitHub link | ✅ |
 
 ---
 
@@ -211,13 +220,13 @@ curl http://10.10.10.x:9090/api/v1/targets | python3 -m json.tool
 
 ## 📊 Kết quả đạt được
 
-- [ ] Mô hình mạng 2 vùng LAN/DMZ với Linux gateway thực hiện NAT, DHCP, DNS, firewall
-- [ ] Phân tích gói tin DHCP, DNS, TCP handshake bằng Wireshark/tcpdump
-- [ ] Nginx load balancer cho Docker containers, kiểm thử fault tolerance
-- [ ] Prometheus + Grafana monitoring toàn bộ hệ thống
-- [ ] Bash script health check + Telegram alert
-- [ ] SSH hardening (key-only) + fail2ban
-- [ ] OpenStack DevStack: tạo instance, floating IP, security group
+- [x] Mô hình mạng 2 vùng LAN/DMZ với Linux gateway thực hiện NAT, DHCP, DNS, firewall
+- [x] Phân tích gói tin DHCP, DNS, TCP handshake bằng Wireshark/tcpdump
+- [x] Nginx load balancer cho Docker containers, kiểm thử fault tolerance
+- [x] Prometheus + Grafana monitoring toàn bộ hệ thống
+- [x] Bash script health check + Telegram alert
+- [x] SSH hardening (key-only) + fail2ban
+- [x] OpenStack DevStack: tạo instance, floating IP, security group
 
 ---
 

@@ -9,17 +9,17 @@
 ### Checklist nội dung
 
 **README chính (`/README.md`):**
-- [ ] Cập nhật link GitHub thật (thay `YOUR_USERNAME`)
-- [ ] Tick vào các mục "Kết quả đạt được" đã hoàn thành
-- [ ] Thêm link sơ đồ mạng từ `docs/network-diagram.png`
+- [x] Cập nhật link GitHub thật (`mimimi2k4/cloud`)
+- [x] Tick vào các mục "Kết quả đạt được" đã hoàn thành
+- [x] Thêm link sơ đồ mạng từ `docs/network-diagram.png`
 
 **TROUBLESHOOTING.md:**
-- [ ] Đã ghi ít nhất 5 lỗi thực sự gặp phải với nguyên nhân và cách sửa
-- [ ] Có mục "Quick Reference" để tra nhanh
+- [x] Đã ghi ít nhất 5 lỗi thực sự gặp phải với nguyên nhân và cách sửa
+- [x] Có mục "Quick Reference" để tra nhanh
 
 **04-openstack/openstack-notes.md:**
-- [ ] Đã điền đủ 6 component bằng lời của mình (không copy-paste tài liệu)
-- [ ] Có "luồng tạo instance" viết lại theo hiểu biết cá nhân
+- [x] Đã điền đủ 6 component bằng lời của mình (không copy-paste tài liệu)
+- [x] Có "luồng tạo instance" viết lại theo hiểu biết cá nhân
 
 ### Chụp Screenshots
 

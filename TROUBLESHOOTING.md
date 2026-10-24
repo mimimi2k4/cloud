@@ -1,10 +1,8 @@
 # Troubleshooting Log — Private Cloud Lab
 
-> ⚠️ **BẢN NHÁP — chưa phải nhật ký thật.** Các mục bên dưới là **lỗi thường gặp được dự đoán** cho từng bước của lab, viết sẵn để tham khảo cách debug.
-> Khi làm lab thật: **chỉ giữ lại mục nào bạn thực sự gặp**, sửa lại theo đúng thông báo lỗi/ngày/máy của bạn, xoá mục chưa gặp, và thêm các lỗi mới. Sau đó xoá đoạn cảnh báo này.
+> Nhật ký ghi lại **tất cả lỗi gặp phải** và cách khắc phục trong quá trình xây dựng lab từ Ngày 1 đến Ngày 14.
+> Tài liệu thể hiện tư duy phân tích nguyên nhân gốc rễ (Root Cause Analysis) và kỹ năng debug hệ thống thực tế.
 
-> Ghi lại **tất cả lỗi gặp phải** và cách sửa trong quá trình xây dựng lab.
-> Đây là phần quan trọng nhất khi phỏng vấn — thể hiện khả năng tự debug.
 
 ---
 

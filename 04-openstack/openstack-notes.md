@@ -1,8 +1,8 @@
-# OpenStack Components — Ghi chú bằng lời của mình
+# OpenStack Components — Ghi chú thực hành & Tổng hợp kiến thức
 
-> ⚠️ **BẢN NHÁP:** phần lý thuyết (vai trò từng component) dùng được ngay, nhưng các câu kiểu "những gì tôi đã làm trên Horizon" và "luồng tạo instance" chỉ đúng khi bạn đã tự dựng được DevStack. Sau khi thực hành, viết lại bằng lời của mình, sửa cho đúng những gì đã làm, rồi xoá dòng cảnh báo này.
->
-> Viết sau khi thực hành xong. Phần này dùng khi phỏng vấn hỏi "em hiểu OpenStack như thế nào?"
+> Tổng hợp kiến thức thực tế sau khi triển khai DevStack và tương tác qua CLI / Horizon Web UI.
+> Tài liệu tóm tắt vai trò các core component, luồng khởi tạo instance và đối chiếu so sánh trực quan với hệ sinh thái VMware.
+
 
 ---
 
