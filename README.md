@@ -68,14 +68,14 @@ Internet ── Host Windows (16GB RAM) ── VMware NAT (192.168.x.x)
 ## 📁 Cấu trúc repo
 
 ```
-private-cloud-lab/
+cloud/
 ├── README.md                    ← file này
 ├── TROUBLESHOOTING.md           ← lỗi gặp phải và cách sửa
 ├── 01-network/
 │   ├── vm1-netplan.yaml         ← cấu hình IP tĩnh VM1
 │   ├── dnsmasq.conf             ← DHCP + DNS
 │   ├── iptables-rules.sh        ← NAT + firewall rules
-│   ├── sshd_config.patch        ← hardened SSH config
+│   ├── sshd_hardening.conf      ← hardened SSH config (drop-in sshd_config.d)
 │   └── screenshots/             ← ảnh Wireshark, tcpdump
 ├── 02-services/
 │   ├── docker-compose.yml       ← 3 web containers
@@ -102,7 +102,7 @@ private-cloud-lab/
 
 > Chi tiết từng lệnh: xem [`01-network/`](./01-network/)
 
-### Tóm tắt những gì đã làm
+### Nội dung giai đoạn này
 
 - Tạo 2 VMware Host-only network: `vmnet2` (LAN 10.10.10.0/24) và `vmnet3` (DMZ 10.10.20.0/24)
 - VM1 có 3 NIC: `ens33` (WAN/NAT), `ens36` (LAN), `ens38` (DMZ)
@@ -277,7 +277,7 @@ curl http://10.10.10.x:9090/api/v1/targets | python3 -m json.tool
 
 ## 📝 Mẫu mô tả CV
 
-> **PRIVATE CLOUD LAB: Mạng, Linux, ảo hóa và giám sát** | *VMware Workstation, Ubuntu Server, Docker, Nginx, Prometheus/Grafana, OpenStack* | [github.com/YOUR_USERNAME/private-cloud-lab](https://github.com/)
+> **PRIVATE CLOUD LAB: Mạng, Linux, ảo hóa và giám sát** | *VMware Workstation, Ubuntu Server, Docker, Nginx, Prometheus/Grafana, OpenStack* | [github.com/mimimi2k4/cloud](https://github.com/mimimi2k4/cloud)
 >
 > - Thiết kế mô hình mạng 2 vùng (LAN/DMZ); cấu hình Linux gateway thực hiện NAT, DHCP, DNS và firewall bằng iptables; phân tích gói tin DHCP/DNS/TCP bằng Wireshark
 > - Triển khai Nginx load balancer (Round Robin) cho 3 Docker containers; kiểm thử fault tolerance khi tắt 1 backend, hệ thống tiếp tục phục vụ bình thường

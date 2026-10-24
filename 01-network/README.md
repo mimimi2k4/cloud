@@ -233,7 +233,7 @@ iptables -L -n -v --line-numbers
 sudo chmod +x /etc/iptables/rules.sh
 sudo bash /etc/iptables/rules.sh
 
-# Lưu rules để tự động load khi reboot
+# Lưu rules để tự động load khi reboot (file iptables-rules.sh trong repo đã có sẵn rule cho port 9100 của node_exporter)
 sudo apt install iptables-persistent -y
 sudo netfilter-persistent save
 
@@ -333,7 +333,14 @@ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
 sudo nano /etc/ssh/sshd_config
 ```
 
-Thay đổi/thêm các dòng sau:
+> ✅ **Cách khuyên dùng:** thay vì sửa `sshd_config`, dùng file drop-in `sshd_hardening.conf` trong repo:
+> ```bash
+> sudo cp sshd_hardening.conf /etc/ssh/sshd_config.d/00-hardening.conf
+> sudo sshd -t && sudo systemctl restart ssh
+> ```
+> Tên file phải bắt đầu bằng `00-`: OpenSSH lấy giá trị **đầu tiên** gặp được, và các file trong `sshd_config.d/` đọc theo thứ tự chữ cái, nên một file như `50-cloud-init.conf` (nếu có, đặt `PasswordAuthentication yes`) sẽ thắng file tên `99-`.
+
+Hoặc sửa trực tiếp `sshd_config`, thay đổi/thêm các dòng sau:
 
 ```ini
 PasswordAuthentication no

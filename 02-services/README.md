@@ -212,6 +212,19 @@ sudo apt install -y nginx
 sudo mv /etc/nginx/sites-enabled/default /etc/nginx/sites-enabled/default.bak
 ```
 
+**Bước 6.4a – Khai báo log format (bắt buộc, nếu không `nginx -t` sẽ báo lỗi `log_format directive is not allowed here`):**
+
+`log_format` chỉ được khai báo trong context `http {}`. File trong `conf.d/` được include vào `http {}`, nên đặt ở đó:
+
+```bash
+sudo tee /etc/nginx/conf.d/lb-logformat.conf << 'EOF'
+log_format lb_log '$remote_addr - [$time_local] "$request" '
+                  '$status $upstream_addr $upstream_response_time';
+EOF
+```
+
+**Bước 6.4b – Cấu hình load balancer:**
+
 ```bash
 # Tạo config load balancer
 sudo tee /etc/nginx/sites-available/loadbalancer.conf << 'EOF'
@@ -229,9 +242,7 @@ server {
     listen 80;
     server_name _;
 
-    # Access log với upstream info để thấy Round Robin
-    log_format lb_log '$remote_addr - [$time_local] "$request" '
-                      '$status $upstream_addr $upstream_response_time';
+    # Access log dùng format lb_log (khai báo ở phần http{}, xem bước 6.4a phía trên)
     access_log /var/log/nginx/lb-access.log lb_log;
     error_log  /var/log/nginx/lb-error.log;
 
@@ -551,14 +562,15 @@ rate(node_network_transmit_bytes_total{device="ens33"}[5m])
 sudo apt install -y netcat-openbsd
 
 # Copy script
-sudo cp ~/private-cloud-lab/03-monitoring/healthcheck.sh /usr/local/bin/healthcheck.sh
+sudo cp ~/cloud/03-monitoring/healthcheck.sh /usr/local/bin/healthcheck.sh
 sudo chmod +x /usr/local/bin/healthcheck.sh
 
-# Điền token và chat ID thật vào script
-sudo nano /usr/local/bin/healthcheck.sh
-# Sửa 2 dòng:
-# TELEGRAM_BOT_TOKEN="TOKEN_CỦA_BẠN"
-# TELEGRAM_CHAT_ID="CHAT_ID_CỦA_BẠN"
+# Token Telegram KHÔNG ghi trong script (repo public). Đặt trong file riêng:
+sudo tee /etc/healthcheck.env << 'EOF'
+TELEGRAM_BOT_TOKEN="TOKEN_CỦA_BẠN"
+TELEGRAM_CHAT_ID="CHAT_ID_CỦA_BẠN"
+EOF
+sudo chmod 600 /etc/healthcheck.env
 
 # Tạo log file
 sudo touch /var/log/healthcheck.log
@@ -573,8 +585,8 @@ sudo tail -20 /var/log/healthcheck.log
 
 ```bash
 # Copy service và timer files
-sudo cp ~/private-cloud-lab/03-monitoring/healthcheck.service /etc/systemd/system/
-sudo cp ~/private-cloud-lab/03-monitoring/healthcheck.timer /etc/systemd/system/
+sudo cp ~/cloud/03-monitoring/healthcheck.service /etc/systemd/system/
+sudo cp ~/cloud/03-monitoring/healthcheck.timer /etc/systemd/system/
 
 # Reload và bật timer
 sudo systemctl daemon-reload

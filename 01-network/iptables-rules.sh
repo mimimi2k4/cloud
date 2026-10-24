@@ -28,8 +28,8 @@ iptables -P OUTPUT ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
 
 # ── Allow established/related connections ─────────────────────
-iptables -A INPUT  -m state --state ESTABLISHED,RELATED -j ACCEPT
-iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT   -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 
 # ── SSH vào VM1 từ LAN ───────────────────────────────────────
 iptables -A INPUT -i $LAN -p tcp --dport 22 -j ACCEPT
@@ -52,6 +52,12 @@ iptables -A FORWARD -i $DMZ -o $WAN -j ACCEPT
 iptables -A FORWARD -i $LAN -o $DMZ -p tcp --dport 80  -j ACCEPT
 iptables -A FORWARD -i $LAN -o $DMZ -p tcp --dport 443 -j ACCEPT
 
+# ── Monitoring: Prometheus (VM3 ở LAN) scrape node_exporter :9100 ──
+# VM1 (chính gateway này): chỉ cho phép từ LAN
+iptables -A INPUT -i $LAN -s $LAN_NET -p tcp --dport 9100 -j ACCEPT
+# VM2 (DMZ): chỉ cho phép đúng VM3 (10.10.10.10) đi qua gateway tới 10.10.20.10:9100
+iptables -A FORWARD -i $LAN -o $DMZ -s 10.10.10.10 -d 10.10.20.10 -p tcp --dport 9100 -j ACCEPT
+
 # ── DHCP requests từ LAN và DMZ ──────────────────────────────
 iptables -A INPUT -i $LAN -p udp --dport 67 -j ACCEPT
 iptables -A INPUT -i $DMZ -p udp --dport 67 -j ACCEPT
@@ -61,6 +67,11 @@ iptables -A INPUT -i $LAN -p udp --dport 53 -j ACCEPT
 iptables -A INPUT -i $LAN -p tcp --dport 53 -j ACCEPT
 iptables -A INPUT -i $DMZ -p udp --dport 53 -j ACCEPT
 iptables -A INPUT -i $DMZ -p tcp --dport 53 -j ACCEPT
+
+# Lưu rules để giữ sau khi reboot (cần: apt install iptables-persistent)
+if command -v netfilter-persistent >/dev/null 2>&1; then
+    netfilter-persistent save
+fi
 
 echo "✅ iptables rules applied successfully"
 echo ""

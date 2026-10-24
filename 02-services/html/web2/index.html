@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Server 2 — Private Cloud Lab</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      text-align: center;
+      padding: 48px 60px;
+      background: linear-gradient(135deg, #0a1628, #0f2d44);
+      border: 1px solid #00b4d8;
+      border-radius: 16px;
+      box-shadow: 0 0 40px rgba(0, 180, 216, 0.3);
+    }
+    .icon { font-size: 3.5em; margin-bottom: 12px; }
+    h1 { color: #00b4d8; font-size: 2.4em; margin-bottom: 8px; }
+    .badge {
+      display: inline-block;
+      background: rgba(0,180,216,0.15);
+      border: 1px solid rgba(0,180,216,0.4);
+      color: #00b4d8;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      margin: 8px 4px;
+    }
+    p { color: #8b949e; margin-top: 16px; font-size: 0.95em; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">⚡</div>
+    <h1>Web Server 2</h1>
+    <span class="badge">container: web2</span>
+    <span class="badge">port: 3002</span>
+    <p>Private Cloud Lab · Nginx Round-Robin Load Balancer</p>
+  </div>
+</body>
+</html>

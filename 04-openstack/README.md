@@ -104,13 +104,9 @@ enable_service glance      # Image
 enable_service cinder      # Block Storage
 enable_service horizon     # Dashboard
 
-# Neutron (networking)
+# Neutron: từ DevStack 2023.1 mặc định dùng OVN, nên KHÔNG bật q-svc/q-agt/q-dhcp/q-l3/q-meta
+# (các service kiểu OVS cũ này xung đột với OVN). Xem 04-openstack/local.conf trong repo.
 enable_service neutron
-enable_service q-svc
-enable_service q-agt
-enable_service q-dhcp
-enable_service q-l3
-enable_service q-meta
 
 # Tắt những gì không cần (tiết kiệm RAM)
 disable_service tempest
@@ -133,7 +129,6 @@ PUBLIC_NETWORK_GATEWAY=192.168.200.1
 # Fixed IP range (internal network)
 FIXED_RANGE=10.11.12.0/24
 FIXED_NETWORK_SIZE=256
-FLAT_INTERFACE=ens33
 EOF
 
 echo "✅ local.conf created"
@@ -480,7 +475,7 @@ openstack volume delete my-volume
 
 ```bash
 # Mở file notes và điền bằng lời của chính mình
-nano ~/private-cloud-lab/04-openstack/openstack-notes.md
+nano ~/cloud/04-openstack/openstack-notes.md
 ```
 
 ---
